@@ -6,7 +6,14 @@ use spells::Spell;
 mod orbs;
 mod spells;
 
-simple_game!("voker", Invoker, setup, update);
+simple_game!("voker", Invoker, config, setup, update);
+
+fn config(config: GameConfig) -> GameConfig {
+    GameConfig {
+        resolution: ResolutionConfig::Physical(800, 500),
+        ..config
+    }
+}
 
 macro_rules! resource {
     ($r:literal) => {
