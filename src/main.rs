@@ -82,6 +82,10 @@ fn setup(_invoker: &mut Invoker, ctx: &mut EngineContext) {
         resource!("spells/alacrity.png"),
     );
     ctx.load_texture_from_bytes(
+        &Spell::ChaosMeteor.to_string(),
+        resource!("spells/chaos_meteor.png"),
+    );
+    ctx.load_texture_from_bytes(
         &Spell::ColdSnap.to_string(),
         resource!("spells/cold_snap.png"),
     );
