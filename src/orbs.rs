@@ -1,4 +1,5 @@
 use std::collections::VecDeque;
+use std::fmt;
 
 use crate::spells::Spell;
 
@@ -9,8 +10,18 @@ pub enum Orb {
     Exort,
 }
 
+impl fmt::Display for Orb {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            Self::Quas => write!(f, "Quas"),
+            Self::Wex => write!(f, "Wex"),
+            Self::Exort => write!(f, "Exort"),
+        }
+    }
+}
+
 #[derive(Debug)]
-pub struct Orbs(VecDeque<Option<Orb>>);
+pub struct Orbs(pub VecDeque<Option<Orb>>);
 
 impl Orbs {
     pub fn new() -> Self {

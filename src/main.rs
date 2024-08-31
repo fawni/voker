@@ -73,20 +73,40 @@ impl Invoker {
 fn setup(_invoker: &mut Invoker, ctx: &mut EngineContext) {
     twink::log::setup();
 
-    ctx.load_texture_from_bytes("Quas", resource!("orbs/quas.png"));
-    ctx.load_texture_from_bytes("Wex", resource!("orbs/wex.png"));
-    ctx.load_texture_from_bytes("Exort", resource!("orbs/exort.png"));
+    ctx.load_texture_from_bytes(&Orb::Quas.to_string(), resource!("orbs/quas.png"));
+    ctx.load_texture_from_bytes(&Orb::Wex.to_string(), resource!("orbs/wex.png"));
+    ctx.load_texture_from_bytes(&Orb::Exort.to_string(), resource!("orbs/exort.png"));
 
-    ctx.load_texture_from_bytes("Alacrity", resource!("spells/alacrity.png"));
-    ctx.load_texture_from_bytes("Chaos Meteor", resource!("spells/chaos_meteor.png"));
-    ctx.load_texture_from_bytes("Cold Snap", resource!("spells/cold_snap.png"));
-    ctx.load_texture_from_bytes("Deafening Blast", resource!("spells/deafening_blast.png"));
-    ctx.load_texture_from_bytes("EMP", resource!("spells/emp.png"));
-    ctx.load_texture_from_bytes("Forge Spirit", resource!("spells/forge_spirit.png"));
-    ctx.load_texture_from_bytes("Ghost Walk", resource!("spells/ghost_walk.png"));
-    ctx.load_texture_from_bytes("Ice Wall", resource!("spells/ice_wall.png"));
-    ctx.load_texture_from_bytes("Sun Strike", resource!("spells/sun_strike.png"));
-    ctx.load_texture_from_bytes("Tornado", resource!("spells/tornado.png"));
+    ctx.load_texture_from_bytes(
+        &Spell::Alacrity.to_string(),
+        resource!("spells/alacrity.png"),
+    );
+    ctx.load_texture_from_bytes(
+        &Spell::ColdSnap.to_string(),
+        resource!("spells/cold_snap.png"),
+    );
+    ctx.load_texture_from_bytes(
+        &Spell::DeafeningBlast.to_string(),
+        resource!("spells/deafening_blast.png"),
+    );
+    ctx.load_texture_from_bytes(&Spell::EMP.to_string(), resource!("spells/emp.png"));
+    ctx.load_texture_from_bytes(
+        &Spell::ForgeSpirit.to_string(),
+        resource!("spells/forge_spirit.png"),
+    );
+    ctx.load_texture_from_bytes(
+        &Spell::GhostWalk.to_string(),
+        resource!("spells/ghost_walk.png"),
+    );
+    ctx.load_texture_from_bytes(
+        &Spell::IceWall.to_string(),
+        resource!("spells/ice_wall.png"),
+    );
+    ctx.load_texture_from_bytes(
+        &Spell::SunStrike.to_string(),
+        resource!("spells/sun_strike.png"),
+    );
+    ctx.load_texture_from_bytes(&Spell::Tornado.to_string(), resource!("spells/tornado.png"));
 
     ctx.load_texture_from_bytes("Invoke", resource!("spells/invoke.png"));
 
@@ -214,6 +234,70 @@ fn update(invoker: &mut Invoker, _ctx: &mut EngineContext) {
             0,
             splat(3.0),
         );
+    }
+
+    let stroke = 0.12;
+    let color = DARK_GREEN;
+
+    match invoker.orbs.0.iter().collect::<Vec<_>>()[..] {
+        [None, None, Some(a)] => {
+            draw_sprite(
+                texture_id(&a.to_string()),
+                vec2(0.0, -1.0),
+                WHITE,
+                0,
+                splat(1.5),
+            );
+            draw_circle_outline(vec2(0.0, -1.0), 0.75, stroke, color, 1);
+        }
+        [None, Some(b), Some(a)] => {
+            draw_sprite(
+                texture_id(&a.to_string()),
+                vec2(1.0, -1.0),
+                WHITE,
+                0,
+                splat(1.5),
+            );
+            draw_circle_outline(vec2(1.0, -1.0), 0.75, stroke, color, 1);
+
+            draw_sprite(
+                texture_id(&b.to_string()),
+                vec2(-1.0, -1.0),
+                WHITE,
+                0,
+                splat(1.5),
+            );
+            draw_circle_outline(vec2(-1.0, -1.0), 0.75, stroke, color, 1);
+        }
+        [Some(c), Some(b), Some(a)] => {
+            draw_sprite(
+                texture_id(&a.to_string()),
+                vec2(2.0, -1.0),
+                WHITE,
+                0,
+                splat(1.5),
+            );
+            draw_circle_outline(vec2(2.0, -1.0), 0.75, stroke, color, 1);
+
+            draw_sprite(
+                texture_id(&b.to_string()),
+                vec2(0.0, -1.0),
+                WHITE,
+                0,
+                splat(1.5),
+            );
+            draw_circle_outline(vec2(0.0, -1.0), 0.75, stroke, color, 1);
+
+            draw_sprite(
+                texture_id(&c.to_string()),
+                vec2(-2.0, -1.0),
+                WHITE,
+                0,
+                splat(1.5),
+            );
+            draw_circle_outline(vec2(-2.0, -1.0), 0.75, stroke, color, 1);
+        }
+        _ => {}
     }
 
     if is_key_pressed(KeyCode::Escape) {
