@@ -77,6 +77,10 @@ fn setup(_invoker: &mut Invoker, ctx: &mut EngineContext) {
     ctx.load_texture_from_bytes(&Orb::Wex.to_string(), resource!("orbs/wex.png"));
     ctx.load_texture_from_bytes(&Orb::Exort.to_string(), resource!("orbs/exort.png"));
 
+    ctx.load_texture_from_bytes(&Orb::Quas.circle(), resource!("orbs/quas_circle.png"));
+    ctx.load_texture_from_bytes(&Orb::Wex.circle(), resource!("orbs/wex_circle.png"));
+    ctx.load_texture_from_bytes(&Orb::Exort.circle(), resource!("orbs/exort_circle.png"));
+
     ctx.load_texture_from_bytes(
         &Spell::Alacrity.to_string(),
         resource!("spells/alacrity.png"),
@@ -190,11 +194,11 @@ fn setup(_invoker: &mut Invoker, ctx: &mut EngineContext) {
 fn update(invoker: &mut Invoker, _ctx: &mut EngineContext) {
     clear_background(Color::new(0.01, 0.01, 0.01, 1.0));
 
-    draw_sprite(texture_id("Quas"), vec2(-10.0, -5.0), WHITE, 0, splat(3.0));
-    draw_sprite(texture_id("Wex"), vec2(-6.0, -5.0), WHITE, 0, splat(3.0));
-    draw_sprite(texture_id("Exort"), vec2(-2.0, -5.0), WHITE, 0, splat(3.0));
+    draw_sprite(texture_id("Quas"), vec2(-10.0, -5.0), WHITE, 1, splat(3.0));
+    draw_sprite(texture_id("Wex"), vec2(-6.0, -5.0), WHITE, 1, splat(3.0));
+    draw_sprite(texture_id("Exort"), vec2(-2.0, -5.0), WHITE, 1, splat(3.0));
 
-    draw_sprite(texture_id("Invoke"), vec2(10.0, -5.0), WHITE, 0, splat(3.0));
+    draw_sprite(texture_id("Invoke"), vec2(10.0, -5.0), WHITE, 1, splat(3.0));
 
     if is_key_pressed(KeyCode::Q) {
         invoker.add_orb(Orb::Quas);
@@ -225,7 +229,7 @@ fn update(invoker: &mut Invoker, _ctx: &mut EngineContext) {
             texture_id(&spell.to_string()),
             vec2(2.0, -5.0),
             WHITE,
-            0,
+            1,
             splat(3.0),
         );
     }
@@ -235,7 +239,7 @@ fn update(invoker: &mut Invoker, _ctx: &mut EngineContext) {
             texture_id(&spell.to_string()),
             vec2(6.0, -5.0),
             WHITE,
-            0,
+            1,
             splat(3.0),
         );
     }
@@ -246,60 +250,60 @@ fn update(invoker: &mut Invoker, _ctx: &mut EngineContext) {
     match invoker.orbs.0.iter().collect::<Vec<_>>()[..] {
         [None, None, Some(a)] => {
             draw_sprite(
-                texture_id(&a.to_string()),
+                texture_id(&a.circle()),
                 vec2(0.0, -1.0),
                 WHITE,
-                0,
+                1,
                 splat(1.5),
             );
-            draw_circle_outline(vec2(0.0, -1.0), 0.75, stroke, color, 1);
+            draw_circle_outline(vec2(0.0, -1.0), 0.75, stroke, color, 2);
         }
         [None, Some(b), Some(a)] => {
             draw_sprite(
-                texture_id(&a.to_string()),
+                texture_id(&a.circle()),
                 vec2(1.0, -1.0),
                 WHITE,
-                0,
+                1,
                 splat(1.5),
             );
-            draw_circle_outline(vec2(1.0, -1.0), 0.75, stroke, color, 1);
+            draw_circle_outline(vec2(1.0, -1.0), 0.75, stroke, color, 2);
 
             draw_sprite(
-                texture_id(&b.to_string()),
+                texture_id(&b.circle()),
                 vec2(-1.0, -1.0),
                 WHITE,
-                0,
+                1,
                 splat(1.5),
             );
-            draw_circle_outline(vec2(-1.0, -1.0), 0.75, stroke, color, 1);
+            draw_circle_outline(vec2(-1.0, -1.0), 0.75, stroke, color, 2);
         }
         [Some(c), Some(b), Some(a)] => {
             draw_sprite(
-                texture_id(&a.to_string()),
+                texture_id(&a.circle()),
                 vec2(2.0, -1.0),
                 WHITE,
-                0,
+                1,
                 splat(1.5),
             );
-            draw_circle_outline(vec2(2.0, -1.0), 0.75, stroke, color, 1);
+            draw_circle_outline(vec2(2.0, -1.0), 0.75, stroke, color, 2);
 
             draw_sprite(
-                texture_id(&b.to_string()),
+                texture_id(&b.circle()),
                 vec2(0.0, -1.0),
                 WHITE,
-                0,
+                1,
                 splat(1.5),
             );
-            draw_circle_outline(vec2(0.0, -1.0), 0.75, stroke, color, 1);
+            draw_circle_outline(vec2(0.0, -1.0), 0.75, stroke, color, 2);
 
             draw_sprite(
-                texture_id(&c.to_string()),
+                texture_id(&c.circle()),
                 vec2(-2.0, -1.0),
                 WHITE,
-                0,
+                1,
                 splat(1.5),
             );
-            draw_circle_outline(vec2(-2.0, -1.0), 0.75, stroke, color, 1);
+            draw_circle_outline(vec2(-2.0, -1.0), 0.75, stroke, color, 2);
         }
         _ => {}
     }

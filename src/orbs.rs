@@ -10,6 +10,16 @@ pub enum Orb {
     Exort,
 }
 
+impl Orb {
+    pub fn circle(&self) -> String {
+        match self {
+            Self::Quas => "Quas Circle".to_string(),
+            Self::Wex => "Wex Circle".to_string(),
+            Self::Exort => "Exort Circle".to_string(),
+        }
+    }
+}
+
 impl fmt::Display for Orb {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
