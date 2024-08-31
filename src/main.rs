@@ -159,9 +159,11 @@ fn setup(_invoker: &mut Invoker, ctx: &mut EngineContext) {
 fn update(invoker: &mut Invoker, _ctx: &mut EngineContext) {
     clear_background(Color::new(0.01, 0.01, 0.01, 1.0));
 
-    draw_sprite(texture_id("Quas"), vec2(-8.0, -5.0), WHITE, 0, splat(3.0));
-    draw_sprite(texture_id("Wex"), vec2(-4.0, -5.0), WHITE, 0, splat(3.0));
-    draw_sprite(texture_id("Exort"), vec2(0.0, -5.0), WHITE, 0, splat(3.0));
+    draw_sprite(texture_id("Quas"), vec2(-10.0, -5.0), WHITE, 0, splat(3.0));
+    draw_sprite(texture_id("Wex"), vec2(-6.0, -5.0), WHITE, 0, splat(3.0));
+    draw_sprite(texture_id("Exort"), vec2(-2.0, -5.0), WHITE, 0, splat(3.0));
+
+    draw_sprite(texture_id("Invoke"), vec2(10.0, -5.0), WHITE, 0, splat(3.0));
 
     if is_key_pressed(KeyCode::Q) {
         invoker.add_orb(Orb::Quas);
@@ -190,7 +192,7 @@ fn update(invoker: &mut Invoker, _ctx: &mut EngineContext) {
     if let Some(spell) = invoker.first_spell {
         draw_sprite(
             texture_id(&spell.to_string()),
-            vec2(4.0, -5.0),
+            vec2(2.0, -5.0),
             WHITE,
             0,
             splat(3.0),
@@ -200,10 +202,14 @@ fn update(invoker: &mut Invoker, _ctx: &mut EngineContext) {
     if let Some(spell) = invoker.second_spell {
         draw_sprite(
             texture_id(&spell.to_string()),
-            vec2(8.0, -5.0),
+            vec2(6.0, -5.0),
             WHITE,
             0,
             splat(3.0),
         );
+    }
+
+    if is_key_pressed(KeyCode::Escape) {
+        std::process::exit(0)
     }
 }
