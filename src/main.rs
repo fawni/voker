@@ -188,7 +188,7 @@ fn setup(_invoker: &mut Invoker, ctx: &mut EngineContext) {
         StaticSoundSettings::new().volume(0.6),
     );
 
-    play_music("Music");
+    play_music_id_ex(sound_id("Music"), PlaySoundParams { looped: true })
 }
 
 fn update(invoker: &mut Invoker, _ctx: &mut EngineContext) {
